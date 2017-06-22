@@ -12,7 +12,7 @@
 
 /*
 
-SQL FOR USERS TABLE :
+
 CREATE TABLE `users` (
   `userId` text,
   `password` text,
@@ -20,11 +20,11 @@ CREATE TABLE `users` (
   `logKeyTime` bigint(20) DEFAULT NULL,
   `logIp` text,
   `type` int(11) DEFAULT NULL,
+  `lastInteraction` bigint(20) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-);
-
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 
 
  */
