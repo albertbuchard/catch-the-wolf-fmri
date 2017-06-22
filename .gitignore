@@ -1,8 +1,7 @@
 node_modules
 *.ai
 *.psd
-src
-*.max.*
+src 
 .flowconfig
 .eslintrc.json
 webpack.config.babel.js
