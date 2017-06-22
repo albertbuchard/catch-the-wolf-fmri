@@ -1,0 +1,31 @@
+{
+  "strings": {
+    "welcomeText": "Welcome to the Catch The Wolf Task!",
+    "changeCenterSquare": {"en" : "When you have to predict the center square\nwill change from a full square to this open square"},
+    "chooseNextPosition": {"en" : "Choose the next position of the wolf\nD: Top Right -- K: Top left\nC: Bottom Right -- M: Bottom Left"},
+    "hitAKeyToContinue": {"en": "Hit a key to continue"},
+    "youSelectedThisTile": {"en": "You selected this tile."},
+    "aLittleSquareShowsYourChoice": {"en": "A little square shows your choice"},
+    "rabbitFirstDisapearTitle": {"en": "Short observation"},
+    "rabbitFirstDisapearMessage": {"en": "The wolf and the rabbit only appear for a short time.<br>Wait until the cross change before predicting!"},
+    "wolfFmriFirstAppearTitle": {"en": "Two types of agents"},
+    "wolfFmriFirstAppearMessage": {"en": "You will also see the wolf during this level.<br>Blocks between rabbit and wolf trials will be separated by a short break."},
+    "blackoutFirstAppearTitle": { "en": "Trial without prediction" },
+    "blackoutFirstAppearMessage": { "en": "On the last trial, there was no prediction phase the central cross did not change. You will get some trials of that form in the next level."},
+    "taskStoppedTitle": {"en": "⛔️ Premature stop ⛔️"},
+    "taskStoppedMessage": {"en": "<h5>Ouch! 😕 </h5> The task was prematurely stopped. It will not be possible to try again."},
+    "taskStoppedReason": {"en": "<br>The reason was: {t}."},
+    "prematureEndPauseAboveThreshold": { "en": "Pause time beyond maximum threshold (5 min per level)"},
+    "pauseText": {"en": "The game is now paused ! Hit any key to restart."},
+    "timeLimitText": {"en": "You have {n} seconds until it is prematurely stopped !"},
+    "pauseRestart": {"en": "Game will start in {n} sec"},
+    "finishedLevelTransition": {"en": "Congratulations ! You just finished level {l}\nHit a key to continue\nYou have {n} seconds remaining for your break"},
+    "finishedBlockTransition": {"en": "You finished block {b} !\nYou have {n} seconds remaining for your break.\nHit a key when you want to start."},
+    "lostConnectionTitle": {"en": "Lost connection !"},
+    "lostConnectionContent": {"en": "You lost connection !<br>Close to reconnect. If you spend more than 30min disconnected the task will not be achievable."},
+    "taskFinishedTitle": { "en": "Finished !" },
+    "taskFinishedContent": { "en": "Yaye ! Well done, you are finished with the task ! 🎉 <br><br>You completion code is {c}.<br><br>Thank you again for your kind participation ! <br><br> The Bavelier Lab team 💛 " }
+  },
+  "cross": { "base": 0, "predict": 1, "topLeft": 2, "topRight": 3, "bottomRight": 4, "bottomLeft": 5, "topLeftLocked": 6, "topRightLocked": 7, "bottomRightLocked": 8, "bottomLeftLocked": 9 },
+  "crossLockByPosition": [6, 7, 8, 9]
+}
