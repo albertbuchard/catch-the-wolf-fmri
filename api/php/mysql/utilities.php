@@ -1,6 +1,6 @@
 <?php
-if (file_exists('./utilities/configDev.php')) {
-  require_once "./utilities/configDev.php";
+if (file_exists('./utilities/config.dev.php')) {
+  require_once "./utilities/config.dev.php";
 } else {
   require_once "./utilities/config.php";
 }

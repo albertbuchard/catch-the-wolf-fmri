@@ -20,7 +20,7 @@ function get_db_connection($host, $dbname, $username, $password, $port = 3306)
   try {
     $bdd = new PDO($connect_string, $username, $password);
   } catch (Exception $e) {
-    throw new Exception('get_db_connection : ' . $e->getMessage() . ' -- '. $connect_string);
+    throw new Exception('get_db_connection : ' . $e->getMessage());
   }
   return $bdd;
 }
