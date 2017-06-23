@@ -130,10 +130,15 @@
           $result += ['status' => 'OK'] + $checkpoint;
         }
 
-        if ($query === 'getLastInteraction') { 
+        if ($query === 'getLastInteraction') {
           $interaction = get_last_interaction($bdd, $userId);
           $result += ['status' => 'OK'] + $interaction;
 
+        }
+
+        if ($query === 'getFinalCode') {
+          $finalCode = get_final_code($bdd, $userId);
+          $result += ['status' => 'OK'] + $finalCode;
         }
       }
 

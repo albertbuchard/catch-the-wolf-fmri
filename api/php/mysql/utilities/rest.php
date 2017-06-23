@@ -102,6 +102,49 @@ function has_checkpoint($bdd, $userId, $checkpoint) {
   }
 }
 
+function get_final_code($bdd, $userId) {
+  if (!pdo_ping($bdd)){
+    throw new Exception("get_checkpoint: bdd is not a valid pdo connection", 1);
+  }
+
+  $checkpoint = has_checkpoint($bdd, $userId, $GLOBALS['_CHECKPOINT_TASKDONE']);
+  if ($checkpoint['code'] == $GLOBALS['_CHECKPOINT_TASKDONE']) {
+
+    $query = "SELECT assignmentId FROM `user_assignments`
+              WHERE userId = :userId
+              LIMIT 1";
+
+    // execute the query
+    $req = prepare_and_execute($bdd, $query, ['userId' => $userId]);
+
+    $count = $req->rowCount();
+    if ($count >= 1) {
+      $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+      return ['status' => 'OK', 'code' => $rows[0]['assignmentId']];
+    }
+    return ['status' => 'OK', 'code' => null];
+  } else {
+    return ['status' => 'OK', 'code' => null];
+  }
+
+}
+
+function set_assignment($bdd, $userId, $assignmentId) {
+  if (!pdo_ping($bdd)){
+    throw new Exception("get_checkpoint: bdd is not a valid pdo connection", 1);
+  }
+
+  $rows = add_rows($bdd, 'user_assignments', ["userId" => $userId, "assignmentId" => $assignmentId]);
+  $count = count($rows);
+
+  if ($count == 1) {
+      return ['status' => 'OK'];
+  } else {
+    throw new Exception("set_code: could not add code", 1);
+  }
+
+
+}
 
 function signup($bdd, $credentials) {
   if ((!is_array($credentials)) || (!isset($credentials['userId'])) || (!isset($credentials['password']))) {
@@ -375,15 +418,16 @@ function is_accredited($bdd, $data = []) {
   if ($count == 1) {
     $rows = $req->fetchAll(PDO::FETCH_ASSOC);
     $message = '';
-    if ($GLOBALS['_SHOULD_CHECK_LAST_INTERACTION']) {
-      $away = has_been_away_for_too_long($bdd, $userId);
-      $message .= $away['message'];
-    }
+
     if ($GLOBALS['_SHOULD_CHECK_TASK_END']) {
       $checkpoint = has_checkpoint($bdd, $userId, $GLOBALS['_CHECKPOINT_TASKEND']);
       if ($checkpoint['code'] == $GLOBALS['_CHECKPOINT_TASKEND']) {
         return ['status' => false, 'message' => $checkpoint['message']];
       }
+    }
+    if ($GLOBALS['_SHOULD_CHECK_LAST_INTERACTION']) {
+      $away = has_been_away_for_too_long($bdd, $userId);
+      $message .= $away['message'];
     }
 
     if (($logKey == $rows[0]['logKey'])&&((!$GLOBALS['_USE_LOG_IP'])||($_SERVER['REMOTE_ADDR'] == $rows[0]['logIp']))) {
@@ -466,6 +510,24 @@ function set_user_timestamp($rows, $userId) {
     return $rows;
 }
 
+function check_user_did_task($bdd, $userId) {
+  if (!pdo_ping($bdd)){
+    throw new Exception("check_user_did_task: bdd is not a valid pdo connection", 1);
+  }
+
+  $table = $GLOBALS['_TABLE_DATA'];
+
+  $query = "SELECT * from ${table}  where userId = :userId";
+  $params = ['userId' => $userId];
+  $req = prepare_and_execute($bdd, $query, $params);
+  $count = $req->rowCount();
+  if ($count < $GLOBALS['_COUNT_THRESHOLD']) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function add_rows($bdd, $table, $rows) {
   if (!pdo_ping($bdd)){
     throw new Exception("add_rows: bdd is not a valid pdo connection", 1);
@@ -480,14 +542,28 @@ function add_rows($bdd, $table, $rows) {
     $rows = set_user_timestamp($rows, $GLOBALS['userId']);
   }
 
+  if (isAssoc($rows)){
+    $rows = [$rows];
+  }
+
+  if ($GLOBALS["_SHOULD_CHECK_IF_USER_DID_TASK"] && ($table == $GLOBALS['_TABLE_CHECKPOINTS'])) {
+    foreach ($rows as $key => $row) {
+      if ($row['code'] == $GLOBALS['_CHECKPOINT_TASKDONE']) {
+        if(!check_user_did_task($bdd, $userId)) {
+          // TODO cheating ?
+          return [];
+        }
+      }
+    }
+  }
+
   table_exists_or_create($bdd, $table, $rows);
+
 
   $query = "INSERT INTO ${table} (";
   $values = " VALUES (";
 
-  if (isAssoc($rows)){
-    $rows = [$rows];
-  }
+
 
   $valuesRow = [];
   $i = 0;
