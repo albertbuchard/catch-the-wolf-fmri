@@ -51,9 +51,13 @@
         } elseif ($_SHOULD_CREATE_USERS_ON_LOGIN) {
           // login failure - try to create new user
           $signup = signup($bdd, $data['credentials']);
-          if (is_array($signup)) {
+          if (is_array($signup) && ($signup['status'])) {
             $result['credentials'] = $signup;
             $result['newUser'] = true;
+          } elseif ($signup['message'] == 'User already exists'){
+            $result['message'] = 'Wrong password';
+          } else {
+            $result['message'] = $signup['message'];
           }
         } else {
           $result['message'] = $logged['message'];

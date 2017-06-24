@@ -54,6 +54,7 @@
 
 
 		var dataManager = new DataManager();
+		dataManager.authorize_manual_login = false;
 		var connection;
 		var connectAndStart = function (password) {
 			dataManager.setConnection({

@@ -164,7 +164,7 @@ function signup($bdd, $credentials) {
 
     $checkExist = get_user($bdd, $userId);
     if ($checkExist->rowCount() > 0) {
-      throw new Exception("signup: user already exists", 1);
+      return ['status' => false, 'message' => 'User already exists']; 
     }
 
 
@@ -187,12 +187,12 @@ function signup($bdd, $credentials) {
         $logKey = substr(implode($k), 0, 20);
         set_logkey($bdd, $userId, $logKey);
 
-        return ['type' => $rows[0]['type'], 'userId' => $userId, 'logKey' => $logKey];
+        return ['status' => 'OK', 'type' => $rows[0]['type'], 'userId' => $userId, 'logKey' => $logKey];
     } elseif ($count == 0) {
-      throw new Exception("signup: could not create user " . $count, 1);
+      return ['status' => false, 'message' => 'Could not create user'];
     } else {
       // userId should be unique
-      throw new Exception("signup: duplicated id ? " . $count, 1);
+      return ['status' => false, 'message' => 'Could not create user'];
     }
   } catch (Exception $e) {
     throw $e;
