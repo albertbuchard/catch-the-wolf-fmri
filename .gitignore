@@ -3,7 +3,7 @@ node_modules
 *.psd
 src
 .flowconfig
-.eslintrc.json
 webpack.config.babel.js
 .babelrc
+.eslintrc.json
 builder.js

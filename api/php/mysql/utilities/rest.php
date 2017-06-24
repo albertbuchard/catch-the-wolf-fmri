@@ -98,7 +98,7 @@ function has_checkpoint($bdd, $userId, $checkpoint) {
     $rows = $req->fetchAll(PDO::FETCH_ASSOC);
     return ['code' => $rows[0]['code'], 'timestamp' => $rows[0]['dbTimestamp'], 'message' => $rows[0]['message']];
   } else {
-    return ['code' => $noCheckpoint, 'timestamp' => 0, 'message' => 'Not found'];
+    return ['code' => $userId, 'timestamp' => 0, 'message' => 'Not found'];
   }
 }
 
@@ -122,9 +122,9 @@ function get_final_code($bdd, $userId) {
       $rows = $req->fetchAll(PDO::FETCH_ASSOC);
       return ['status' => 'OK', 'code' => $rows[0]['assignmentId']];
     }
-    return ['status' => 'OK', 'code' => null];
+    return ['status' => 'OK', 'code' => null, "error" => "A"];
   } else {
-    return ['status' => 'OK', 'code' => null];
+    return ['status' => 'OK', 'code' => null, "error" => "B"];
   }
 
 }
@@ -133,9 +133,14 @@ function set_assignment($bdd, $userId, $assignmentId) {
   if (!pdo_ping($bdd)){
     throw new Exception("get_checkpoint: bdd is not a valid pdo connection", 1);
   }
+  $tempsShoudAddUserId = $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'];
+  $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = false;
+  $GLOBALS['userId'] = $userId;
 
   $rows = add_rows($bdd, 'user_assignments', ["userId" => $userId, "assignmentId" => $assignmentId]);
   $count = count($rows);
+
+  $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = $tempsShoudAddUserId;
 
   if ($count == 1) {
       return ['status' => 'OK'];
@@ -549,9 +554,12 @@ function add_rows($bdd, $table, $rows) {
   if ($GLOBALS["_SHOULD_CHECK_IF_USER_DID_TASK"] && ($table == $GLOBALS['_TABLE_CHECKPOINTS'])) {
     foreach ($rows as $key => $row) {
       if ($row['code'] == $GLOBALS['_CHECKPOINT_TASKDONE']) {
-        if(!check_user_did_task($bdd, $userId)) {
+        if(!check_user_did_task($bdd, $GLOBALS['userId'])) {
           // TODO cheating ?
-          return [];
+          $table = $GLOBALS['_TABLE_DATA'];
+
+          $query = "SELECT * from ${table}  where userId = :userId";
+          return ['message' => 'Not done'];
         }
       }
     }
