@@ -24,7 +24,7 @@
     "lostConnectionTitle": {"en": "Lost connection !"},
     "lostConnectionContent": {"en": "You lost connection !<br>Close to reconnect. If you spend more than 30min disconnected the task will not be achievable."},
     "taskFinishedTitle": { "en": "Finished !" },
-    "taskFinishedContent": { "en": "Yaye ! Well done, you are finished with the task ! 🎉 <br><br>You can now submit the task.<br><br>Thank you again for your kind participation ! <br><br> The Bavelier Lab team 💛 " }
+    "taskFinishedContent": { "en": "Yaye ! Well done, you are finished with the task ! 🎉 <br><br>You can now submit the task. <br><br>Thank you again for your kind participation ! <br><br> The Bavelier Lab team 💛 " }
   },
   "cross": { "base": 0, "predict": 1, "topLeft": 2, "topRight": 3, "bottomRight": 4, "bottomLeft": 5, "topLeftLocked": 6, "topRightLocked": 7, "bottomRightLocked": 8, "bottomLeftLocked": 9 },
   "crossLockByPosition": [6, 7, 8, 9]
