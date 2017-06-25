@@ -137,7 +137,7 @@
 			});
 
 			document.getElementById('submitButton').addEventListener('click', function () {
-				checkFinishAndSend();
+				//checkFinishAndSend();
 			});
 
 
@@ -219,15 +219,17 @@
 
 					<form id="results" name="results" method="post" action="https://www.mturk.com/mturk/externalSubmit">
 				<!--<form id="results" name="results" method="post" action="https://workersandbox.mturk.com/mturk/externalSubmit">-->
-						<input type="hidden" name="assignmentId" id="assignmentId" value="" />
+						<input type="hidden" name="assignmentId" id="assignmentId" value="3JV9LGBJWTFOXUGF5Q6EIVMJ7AZGO2" />
 						<input type="hidden" name="task" id="task" value="NA" />
 						<textarea id="comments" name="comments" rows="4" cols="60"></textarea><br/>
 
 						<!-- this submit button only becomes active when they start the task. When a participant presses this button, it also
 						checks to see if they have actually completed the task (based on records in the database). If they haven't, it displays
 						a pop-up error message. -->
+						<input type="submit" name="submit" value="submit">
+
 					</form>
-					<button type="button" class="btn btn-primary btn-lg" name="submitButton" id="submitButton">Submit HIT</button>
+					<!-- <button type="button" class="btn btn-primary btn-lg" name="submitButton" id="submitButton">Submit HIT</button> -->
 
 				<?php } ?>
 			</div>
