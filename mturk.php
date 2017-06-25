@@ -108,7 +108,7 @@
 						document.getElementById('results').submit();
 					} else {
 						return Promise.reject('You did not finish the task properly.')
-					}
+					} 
 
 	      })
 				.catch(function (e) {
