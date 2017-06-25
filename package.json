@@ -46,7 +46,7 @@
     "eslint-plugin-react": "^7.1.0",
     "experiment-babylon-js": "^2.5.12",
     "experiment-boxes": "^0.1.40",
-    "experiment-js": "^0.5.71",
+    "experiment-js": "^0.5.73",
     "experiment-mathjs": "^3.10.2",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",

@@ -81,7 +81,7 @@
 		      }
 		    }
 		    // TODO open pop up and start task
-				var popup = window.open('./index.html',  "_blank", "toolbar=no,scrollbars=no,resizable=yes");
+				var popup = window.open('./index.html',  "_blank", "toolbar=no,scrollbars=no,resizable=no");
 				if (popup === null)
 				   alert('Please change your popup settings');
 				else  {
@@ -126,9 +126,7 @@
 
 		document.addEventListener('DOMContentLoaded', function() {
 			var form = document.getElementById('results');
-			console.log('OUAIS OUAIS OK'+document.referrer);
         if (document.referrer && ( document.referrer.indexOf('workersandbox') != -1) ) {
-						console.log('WOWOWOWOWO OK'+document.referrer.indexOf('workersandbox'));
             form.action = "https://workersandbox.mturk.com/mturk/externalSubmit";
         }
 
