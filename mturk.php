@@ -96,7 +96,7 @@
 				var modal = new SmartModal()
 				modal.title = 'Login Error'
 	  		modal.content = e
-			});
+			}); 
 		}
 
 		var checkFinishAndSend = function () {
@@ -108,7 +108,7 @@
 						document.getElementById('results').submit();
 					} else {
 						return Promise.reject('You did not finish the task properly.')
-					} 
+					}
 
 	      })
 				.catch(function (e) {
