@@ -120,8 +120,7 @@
 				var modal = new SmartModal()
 				modal.title = 'Error'
 				modal.content = 'You must finish the task before you can submit.'
-			}
-
+			} 
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
