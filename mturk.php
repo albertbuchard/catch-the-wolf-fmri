@@ -96,7 +96,7 @@
 				var modal = new SmartModal()
 				modal.title = 'Login Error'
 	  		modal.content = e
-			}); 
+			});
 		}
 
 		var checkFinishAndSend = function () {
