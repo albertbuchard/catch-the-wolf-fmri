@@ -125,6 +125,12 @@
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
+			var form = document.getElementById('results');
+        if (document.referrer && ( document.referrer.indexOf('workersandbox') != -1) ) {
+            form.action = "http://workersandbox.mturk.com/mturk/externalSubmit";
+        }
+
+
 			document.getElementById('startTaskButton').addEventListener('click', function () {
 				var password = document.getElementById('password').value
 				if (password.length < 6) {
