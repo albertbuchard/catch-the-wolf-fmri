@@ -75,6 +75,8 @@
 		      if (typeof checkpoint.code === 'undefined') {
 		        return Promise.reject('Connection error.')
 		      } else if ((checkpoint.code === 'taskDone') || (checkpoint.code === 'taskEndNoComeback')) {
+						$("#finishDiv").show();
+						$("#consentAndSubmit").hide();
 		        return Promise.reject('Task has already ended with message: ' + checkpoint.message+'<br>It is not possible to pass it twice.')
 		      }
 		    }
@@ -105,7 +107,7 @@
 						document.getElementById('assignmentId').value = r.code;
 						document.getElementById('results').submit();
 					} else {
-						return Promise.reject('You did not finish the task !')
+						return Promise.reject('You did not finish the task properly.')
 					}
 
 	      })
