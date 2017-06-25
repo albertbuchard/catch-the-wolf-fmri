@@ -133,16 +133,50 @@ function set_assignment($bdd, $userId, $assignmentId) {
   if (!pdo_ping($bdd)){
     throw new Exception("get_checkpoint: bdd is not a valid pdo connection", 1);
   }
-  $tempsShoudAddUserId = $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'];
-  $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = false;
-  $GLOBALS['userId'] = $userId;
 
-  $rows = add_rows($bdd, 'user_assignments', ["userId" => $userId, "assignmentId" => $assignmentId]);
-  $count = count($rows);
+  // get user from bd with userid
+  $query = "SELECT assignmentId FROM user_assignments
+              WHERE userId = :userId";
 
-  $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = $tempsShoudAddUserId;
+  $params = [];
+  $params['userId'] = $userId;
 
-  if ($count == 1) {
+  $req = prepare_and_execute($bdd, $query, $params);
+  $count = $req->rowCount();
+  $countb = 0;
+  if ($count >= 1) {
+    if ($GLOBALS['_SHOULD_UPDATE_ASSIGNMENT_ID']) {
+      $rows = $req->fetchAll(PDO::FETCH_ASSOC);
+      if ($rows[0]['assignmentId'] != $assignmentId) {
+        $query = "UPDATE `user_assignments` SET `assignmentId`=:assignmentId WHERE `userId` = :userId";
+
+        $params = [];
+        $params['userId'] = $userId;
+        $params['assignmentId'] = $userId;
+
+        $req = prepare_and_execute($bdd, $query, $params);
+        $countb = $req->rowCount();
+      }
+    } else {
+      $countb = 1;
+    }
+
+
+  } else {
+    $tempsShoudAddUserId = $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'];
+    $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = false;
+    $GLOBALS['userId'] = $userId;
+
+    $rows = add_rows($bdd, 'user_assignments', ["userId" => $userId, "assignmentId" => $assignmentId]);
+    $countb = count($rows);
+
+    $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = $tempsShoudAddUserId;
+  }
+
+
+
+
+  if ($countb >= 1) {
       return ['status' => 'OK'];
   } else {
     throw new Exception("set_code: could not add code", 1);
@@ -164,7 +198,7 @@ function signup($bdd, $credentials) {
 
     $checkExist = get_user($bdd, $userId);
     if ($checkExist->rowCount() > 0) {
-      return ['status' => false, 'message' => 'User already exists']; 
+      return ['status' => false, 'message' => 'User already exists'];
     }
 
 
