@@ -155,13 +155,9 @@ function set_assignment($bdd, $userId, $assignmentId) {
         $params['assignmentId'] = $assignmentId;
 
         $req = prepare_and_execute($bdd, $query, $params);
-        $countb = $req->rowCount();
       }
-    } else {
-      $countb = 1;
     }
-
-
+    $countb = 1;
   } else {
     $tempsShoudAddUserId = $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'];
     $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = false;
@@ -173,16 +169,11 @@ function set_assignment($bdd, $userId, $assignmentId) {
     $GLOBALS['_SHOULD_SET_USERID_FOR_ALL_ADD'] = $tempsShoudAddUserId;
   }
 
-
-
-
   if ($countb >= 1) {
       return ['status' => 'OK'];
   } else {
-    throw new Exception("set_code: could not add code", 1);
-  }
-
-
+      return ['status' => false, 'message' => "set_code: could not add code"];
+  }  
 }
 
 function signup($bdd, $credentials) {
