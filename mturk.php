@@ -126,7 +126,9 @@
 
 		document.addEventListener('DOMContentLoaded', function() {
 			var form = document.getElementById('results');
+			console.log('OUAIS OUAIS OK'+document.referrer);
         if (document.referrer && ( document.referrer.indexOf('workersandbox') != -1) ) {
+
             form.action = "http://workersandbox.mturk.com/mturk/externalSubmit";
         }
 
