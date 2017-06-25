@@ -152,7 +152,7 @@ function set_assignment($bdd, $userId, $assignmentId) {
 
         $params = [];
         $params['userId'] = $userId;
-        $params['assignmentId'] = $userId;
+        $params['assignmentId'] = $assignmentId;
 
         $req = prepare_and_execute($bdd, $query, $params);
         $countb = $req->rowCount();
