@@ -133,11 +133,16 @@
 
 			document.getElementById('startTaskButton').addEventListener('click', function () {
 				var password = document.getElementById('password').value
+				var consent = document.getElementById('consentcx').checked
 				if (password.length < 6) {
 					var modal = new SmartModal();
 					modal.title = 'Password too short';
 		  		modal.content = 'Please enter a password longer than 6 character.';
-				} else {
+				} else if (!consent) {
+					var modal = new SmartModal();
+					modal.title = 'Consent';
+		  		modal.content = 'Please indicate that you have read and understood the information and consent to do the task (click on the checkbox).';
+			  }else {
 					connectAndStart(password);
 				}
 			});
@@ -181,7 +186,7 @@
 					<!-- we need to get the participant's consent before they start each task -->
 						<span id="consentAndSubmit" >
 					<p>
-						You must read and understand <a target="_blank" href="./assets/doc/Information_Letter.pdf">the consent form</a>
+						You must read and understand <a target="_blank" href="./assets/media/information.pdf">the consent form</a>
 						before participating. <strong>You must also be between 18 and 75 years of age.</strong>
 					</p>
 
@@ -193,7 +198,7 @@
 				<?php } else { ?>
 					<span id="consentAndSubmit" >
 					<p>To start the task, you must first agree that you have read and understood
-						<a target="_blank" href="./assets/doc/Information_Letter.pdf">the consent form</a>
+						<a target="_blank" href="./assets/media/information.pdf">the consent form</a>
 						and you certify that you are between 18 and 75 years of age.
 					</p>
 
