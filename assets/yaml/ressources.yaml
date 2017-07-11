@@ -8,10 +8,11 @@ tutorials:
           The members of Bavelier lab extend a warm welcome to you from Geneva! We are very grateful that you're interested in our experiment!<br>
           This short tutorial will go over the mechanics of the task to make sure everything is clear before you start!<br><br>
           <h5>General description</h5>
-          The goal of the task is to look at how a wolf moves between four positions of the screen,
-          and to predict where it is going to appear next with your keyboard.<br>
+          The goal of the task is to predict where different animals are going to appear next based on their current position. Using your keyboard you will select among four positions on the screen.<br>
+          You will go through <b>six levels</b> of increasing difficulty. Four levels with four different wolves (grey, yellow, blue and red),
+          then a level with a rabbit, then a final level with the fourth wolf (red).<br>
+          The last three levels will be different and you will go through another short tutorial before starting the 4th level.<br>
           Most trials will consist of an observation phase and prediction phase.<br>
-          You will go through <b>four levels</b> of increasing difficulty.<br>
           The task will last between ⏱<b>1 and 2 hours</b>⏱, depending on the breaks you may take.<br><br>
       fr: >
           <h5>Bienvenue ! 👋 😄 </h5>
@@ -28,18 +29,19 @@ tutorials:
     title: { en: '⚠️ IMPORTANT ⚠️ ' }
     content:
       en: >
-          After completing each level, you will be given a 15 minute break before moving on. After completing all four levels of the task, you will be able to submit it on MTurk.
+          After completing each level, you will be given a break for up to 15 minutes before moving on. After completing all six levels of the task, you will be able to submit it on MTurk.
           <br/><br/>
-          <b>However, certain actions will disqualify you from the task, and you will not be paid for you participation!</b> These are:
+          <b>However, certain actions will disqualify you from the task, and you will not be paid for you participation!</b> <br>Please respect those rules:
           <ul>
-            <li>Taking breaks at any time not during the designated break period [*]</li>
-            <li>Not providing a response to a trial more than 5 times in a row</li>
-            <li>Not providing a response for more than 20% of trials</li>
-            <li>Losing connection to the task for longer than 15 minutes</li>
-            <li>Cheating or obvious behavior showing lack of engagement</li>
+            <li>Do not take breaks outside the designated break period [*]</li>
+            <li>Do not miss to respond more than 5 times in a row[*]</li>
+            <li>Do not miss to respond on more than 20% of the time</li>
+            <li>Do not lose internet connection for longer than 15 minutes</li>
+            <li>Do not cheat or show obvious lack of engagement</li>
           </ul>
-          [*] If you navigate away from the task page, a <b>30 second</b> countdown will appear to warn you.
-          If the timer is up before you get back to the page, you will be blocked from completing the task!<br>
+          <br>
+          [*] If you navigate away from the task page or miss to respond five times in a row, a <b>30 seconds</b> countdown will appear to warn you.
+          If the timer is up before you get back to the page, you will be blocked from completing the task!<br><br>
           <b>If you accept these conditions, please proceed. ✌😉</b> If you do not, please return this HIT.
       fr: >
           <B> Après avoir complété les quatre niveaux de la tâche, vous pourrez la soumettre sur MTurk. </B>
@@ -71,28 +73,28 @@ tutorials:
           <br>
             <center><img src='./assets/sprites/cross/predictionSquare.svg'></center>
           <br>
-          This change marks the start of the prediction phase. As soon as you see this dotted square you will have to predict the next position of the wolf
-          as fast as you can. Your predictions will be made with key presses, which we will review shortly.
+          This change marks the start of the prediction phase. As soon as you see this dotted square you will have to predict the next position of the wolf based on where he was previously.
+          Predict as fast as you can. Your predictions will be made with key presses, which we will review shortly.
           <br>
           After making a prediction, you will wait briefly until the wolf appears in his new position.
           <br>
-          <b>Failing to give a response 5 times in a row will disqualify you from the task!</b>
+          <b>Failing to give a response 5 times in a row will pause the task and risk disqualifying you from the task!</b>
           <br>
 
   fourLevels:
-    title: { en: 'Task Structure: Four Levels' }
+    title: { en: 'Task Structure: Six Levels' }
     content:
       en: >
           <h5>The levels</h5>
-          There will be <b>four levels</b> in this task, the first three levels are relatively short and will last around 10 minutes each.
-          The fourth level will be slower, and it will last around 30 minutes.
+          There will be <b>SIX levels</b> in this task, the first three levels are relatively short and will last around 10 minutes each.
+          During the levels 4 5 and 6, the animals will be slower, but each level will also last around 10 minutes.
           <br><br>
           <h5>Breaks</h5>
-          You cannot pause the game during levels. If you open another page/program, or if you do not respond after a while, the game will pause itself.
-          <b>If the game is paused for longer than 30 seconds total for a level, you will be disqualified from the task.</b><br>
-          Breaks are allowed between levels, but long pauses may have a strong
-          and uncontrollable impact on your ability to learn during the task; they may affect our results in unpredictable ways.
-          This is why we can only allow breaks up to 15 minutes.<br><br>
+          You cannot pause the game during levels. If you open another page/program, or if you do not respond after a while, the game will pause.
+          <b>If the game is paused for longer than 30 seconds total for a level, you will be disqualified from the task.</b><br><br>
+          Breaks are allowed between levels, but these breaks must not exceed 15 minutes!<br> This is because we want all our participants to complete this task in similar conditions.
+          Longer pauses may have a strong impact on your ability to learn during the task and may affect our results in unpredictable ways.
+          <br><br>
           Completing the task will take 1-2 hours, depending on how long your breaks are.<br><br>
 
 
@@ -100,10 +102,10 @@ tutorials:
     title: { en: 'Level Progress' }
     content:
       en: >
-          During each level you can see your progress through the progress indicator around the center square.
-          As you progress, the square will gradually get fuller:
+          During each level, as you progress, you will see a white line growing around the center square.
+          When the line form a full square the level will be finished:
           <br><br>
-            <center><img width="20" height="20" src='./assets/sprites/cross/predictionSquareWithLoader.gif'></center>
+            <center><img width="20" height="20" src='./assets/sprites/cross/predictionSquareWithCenterLoader.gif'></center>
           <br>
 
 
@@ -139,15 +141,15 @@ tutorials:
     title: { en: 'End Tutorial?' }
     content:
       en: >
-          Do you feel confident that you understand the task? <br>
-          If not, you can restart the tutorial by clicking here:
-          <button class="btn btn-secondary dragbox-button smartmodal-closebutton" onClick="window.taskObject.context.stateManager.newEvent('restartTutorial')">Restart tutorial</button>
-          <br><br>
           Please be aware that too many missing responses makes your data unusable! Cheating also may skew our results and cause us to draw the wrong conclusions.<br>
-          For this reason, an algorithm will check the validity of your data at the end of the task.
-          <b>If the data is not valid, you will not receive the bonus payment for adequate completion, and we will not allow you to participate in our future studies.</b>
+          For this reason, you will have to respect the rules described earlier in order to finish the task and get paid.<br>
           <br><br>
+          Do you feel confident that you understand the task? 
+          If not, you can restart the tutorial by clicking here:   <button class="btn btn-secondary dragbox-button smartmodal-closebutton" onClick="window.taskObject.context.stateManager.newEvent('restartTutorial')">Restart tutorial</button>
+          <br>
           You can continue when you are ready to start the task!
+
+
 
   fmriIntro:
     title: { en: 'Last Level' }
@@ -155,8 +157,8 @@ tutorials:
       en: >
           Congratulations for finishing the first three parts!
           <br><br>
-          For this last level, it will be slower than the previous levels.<br>
-          It is not a bug, and the goal remains the same: predict the next position correctly! <br>
+          For this last level, it will be <b>slower</b> than the previous levels and will last around 30min.<br>
+          It is <b>not a bug</b>, and the goal remains the same: predict the next position correctly! <br>
           Because it is slower, the task is split into <b>three "blocks"</b> of 50 trials. You can take a short break of 5 minutes between each block.<br>
           <br>
 
@@ -164,18 +166,19 @@ tutorials:
     title: { en: 'New Feature: Catch The Rabbit'}
     content:
       en: >
-          You will sometimes have to catch a <b>rabbit</b>!
-          The rabbit does not behave like the wolf; it will be your job to figure out how to best predict its next position.<br>
-          You will go through a short tutorial so that you can familliarize yourself with the rabbit.<br>
-          The rabbit will appear in the <b>second block</b>, and you will have to predict its movement for 50 trials.
+          During this level you will have a first block of 50 trials where you will have to catch a Wolf, then a block of 50 trials where you will have ot catch a <b>Rabbit</b>, and finally another block of 50 trials
+          where you wll have to catch the wolf again.
+          The two wolves in this level are the same. On the other hand the rabbit does not behave like the wolf; it will be your job to figure out how to best predict its next position.<br>
+          You will go through a short tutorial so that you can familiarize yourself with the rabbit.<br>
+          The rabbit will appear in the <b>second block</b>, and you will have to predict its next position for 50 trials.
 
 
   fmriDelay:
     title: { en: 'New Feature: Delays' }
     content:
       en: >
-          Another new change is that you will not predict right after observing the new position of the wolf/rabbit.<br>
-          The wolf/rabbit will appear for a short time, and then disappear. You will have to wait a short delay before making a prediction.<br>
+          Another new change is that you will not predict right after observing the new position of the animal.<br>
+          The animal will appear for a short time, and then disappear. You will have to wait a short delay before making a prediction.<br>
           As before, the signal for you to hit a response key will be given by the center square changing to a dotted square:
           <br>
             <center><img src='./assets/sprites/cross/predictionSquare.svg'></center>
@@ -211,6 +214,63 @@ tutorials:
           If not you can restart the tutorial by clicking here: <button class="btn btn-secondary dragbox-button smartmodal-closebutton" onClick="window.taskObject.context.stateManager.newEvent('restartTutorial')">Restart tutorial</button>
           <br><br>
           You can continue when you are ready to start the task!
+wolfFirstAppears:
+  title:
+    en: Four possible positions
+  message:
+    en: The wolf may appear at any of the four position on the screen.
+  passed: false
+wolfHasAppeared:
+  title:
+    en: Predict wolf's next position
+  message:
+    en: >
+        The wolf has appeared on the top left position. With the keyboard keys predict its next position.<br>
+        D for top left, C for bottom left, K for top right, and M for bottom right.
+  passed: false
+predictionTest:
+  title:
+    en: Prediction phase
+  message:
+    en: Predict the next position of the wolf.
+  passed: false
+  numberOfPrediction: 0
+realTimeTest:
+  title:
+    en: Now try with the real timing
+  message:
+    en: Congratulations ! Now that you got the gist of it, you will have to predict as fast as possible.
+  passed: false
+rabbitFirstAppear:
+  title:
+    en: Predict the next position of the Rabbit
+  message:
+    en: Use the keyboard to predict the next position of the rabbit.
+  passed: false
+rabbitFirstDisapear:
+  title:
+    en: Short observation
+  message:
+    en: >
+        The wolf and the rabbit only appear for a short time.<br>Wait until the square
+        changes before predicting!
+  passed: false
+wolfFmriFirstAppear:
+  title:
+    en: Two types of animals
+  message:
+    en: >
+        You will also see the wolf during this level.<br>Blocks between rabbit and
+        wolf trials will be separated by a short break.
+  passed: false
+blackoutFirstAppear:
+  title:
+    en: Trial without prediction
+  message:
+    en: >
+        On the last trial, there was no prediction phase the center square did not
+        change. You will get some trials of that form in the next level.
+  passed: false
 strings:
   welcomeText: Welcome to the Catch the Wolf Task!
   changeCenterSquare:
@@ -228,21 +288,6 @@ strings:
     en: You selected this tile.
   aLittleSquareShowsYourChoice:
     en: A little square shows your choice
-  rabbitFirstDisapearTitle:
-    en: Short observation
-  rabbitFirstDisapearMessage:
-    en: The wolf and the rabbit only appear for a short time.<br>Wait until the square
-      changes before predicting!
-  wolfFmriFirstAppearTitle:
-    en: Two types of animals
-  wolfFmriFirstAppearMessage:
-    en: You will also see the wolf during this level.<br>Blocks between rabbit and
-      wolf trials will be separated by a short break.
-  blackoutFirstAppearTitle:
-    en: Trial without prediction
-  blackoutFirstAppearMessage:
-    en: On the last trial, there was no prediction phase the center square did not
-      change. You will get some trials of that form in the next level.
   endReasonIdle:
     en: "You were idle for more than {t} sec during level {l}"
     fr: "Vous êtes resté inactif pendant plus de {t} sec au niveau {l}"
@@ -264,11 +309,11 @@ strings:
   finishedLevelTransition:
     en: |-
       Congratulations! You just finished level {l}
-      Hit a key to continue
-      You have {n} seconds remaining for your break
+      You have {n} seconds remaining for your break.
+      Hit a key when you want to start.
   finishedBlockTransition:
     en: |-
-      You finished block {b} !
+      You finished level {b} !
       You have {n} seconds remaining for your break.
       Hit a key when you want to start.
   lostConnectionTitle:

@@ -194,25 +194,7 @@
 						<strong>Please only accept the HIT if you plan to complete all portions of it.</strong>
 					</p>
 
-					<p><strong>The task lasts between 1 hour and 2 hours depending on the breaks you take and is paid 12$</strong></p>
-
-					<p>
-						The task is composed of four levels of increasing difficulty during which the goal is to predict the next position of a wolf moving on the screen.
-					</p>
-					<p>
-						After completing each level, you will be given a 15 minute break before moving on. After completing all four levels of the task, you will be able to submit it on MTurk.
-          <br/><br/>
-          <b>However, certain actions will disqualify you from the task, and you will not be paid for you participation!</b> These are:
-          <ul>
-            <li>Taking breaks at any time not during the designated break period [*]</li>
-            <li>Not providing a response to a trial more than 5 times in a row</li>
-            <li>Not providing a response for more than 20% of trials</li>
-            <li>Losing connection to the task for longer than 15 minutes</li>
-            <li>Cheating or obvious behavior showing lack of engagement</li>
-          </ul>
-          [*] If you navigate away from the task page, a <b>30 second</b> countdown will appear to warn you.
-          If the timer is up before you get back to the page, you will be blocked from completing the task!<br>
-          </p>
+					<p><strong>The task lasts between 1 hour and 2 hours depending on the breaks you take and is paid 12$ after completion</strong></p>
 
 					<p>Screenshot:<br><br>
 						<center><img src="./assets/images/screenshot.png" alt="In-game screenshot"></center>
