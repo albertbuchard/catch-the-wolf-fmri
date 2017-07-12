@@ -1,11 +1,6 @@
 <?php
 
-	if($_SERVER["HTTPS"] != "on") {
-	    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-	    exit();
-	}
-
-	ini_set('display_errors', 0);
+	ini_set('display_errors', 0); 
 
 	if (file_exists('./api/php/mysql/utilities/config.dev.php')) {
 	  require_once "./api/php/mysql/utilities/config.dev.php";
@@ -26,11 +21,18 @@
 	if (isset($_REQUEST["workerId"]) && isset($_REQUEST["assignmentId"])) {
 		$_SESSION["subjID"] = $_REQUEST["workerId"];
 		set_assignment($bdd, $_REQUEST["workerId"], $_REQUEST["assignmentId"]);
+
+		if($_SERVER["HTTPS"] != "on") {
+		    header("Location: https://" . $_SERVER["HTTP_HOST"] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)."?workerId=".$_REQUEST["workerId"]."&assignmentId=".$_REQUEST['assignmentId']);
+		    exit();
+		}
 	}
 	//if the worker ID is not passed, this means the participant "previewing" the HIT and hasn't accepted it
 	else {
 		$_SESSION["subjID"] = "NA";
 	}
+
+
 ?>
 <!DOCTYPE html>
 
