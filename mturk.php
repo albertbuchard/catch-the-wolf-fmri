@@ -23,7 +23,7 @@
 		set_assignment($bdd, $_REQUEST["workerId"], $_REQUEST["assignmentId"]);
 
 		if($_SERVER["HTTPS"] != "on") {
-		    header("Location: https://" . $_SERVER["HTTP_HOST"] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)."?workerId=".$_REQUEST["workerId"]."&assignmentId=".$_REQUEST['assignmentId']);
+		    header("Location: https://" . $_SERVER["HTTP_HOST"] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)."?workerId=".urlencode($_REQUEST["workerId"])."&assignmentId=".urlencode($_REQUEST['assignmentId']));
 		    exit();
 		}
 	} else {
