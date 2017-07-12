@@ -91,7 +91,7 @@
 		      }
 		    }
 		    // TODO open pop up and start task
-				var popup = window.open('https://www.brainandlearning.org/albert/catch-the-wolf-fmri-new/index.html',  "_blank", "toolbar=no,scrollbars=no,resizable=no");
+				var popup = window.open('./index.html',  "_blank", "toolbar=no,scrollbars=no,resizable=no");
 				if (popup === null)
 				   alert('Please change your popup settings');
 				else  {
