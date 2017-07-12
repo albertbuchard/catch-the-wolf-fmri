@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-
-<!-- get participant info -->
 <?php
+
+	if($_SERVER["HTTPS"] != "on") {
+	    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+	    exit();
+	}
+
 	ini_set('display_errors', 0);
 
 	if (file_exists('./api/php/mysql/utilities/config.dev.php')) {
@@ -29,6 +32,9 @@
 		$_SESSION["subjID"] = "NA";
 	}
 ?>
+<!DOCTYPE html>
+
+<!-- get participant info -->
 
 <html>
 <head>
@@ -49,6 +55,10 @@
 	<script src="node_modules/experiment-js/lib/experiment.max.js" charset="utf-8"></script>
 
 	<script>
+	if (location.protocol != 'https:') {
+	 location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+	}
+
 	<?php if ($_SESSION["subjID"] != 'NA') { ?>
 		var subjID = '<?php echo $_SESSION["subjID"] ?>';
 
