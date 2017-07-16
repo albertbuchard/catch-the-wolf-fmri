@@ -116,7 +116,7 @@ tutorials:
           During the prediction phase, you will use your keyboard to respond where you think the wolf will appear next.
           Use the following four keys for your responses:
           <br>
-          <center><img src="./assets/sprites/keyboard/fullsize_color_legend.png"></center>
+          <center><img src="./assets/sprites/keyboard/fullsize_color_legend.png" style="max-width: 500px;"></center>
           <br>
           <ul>
             <li>D - to pick the top left position</li>
