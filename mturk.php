@@ -60,9 +60,16 @@
 	 location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 	}
 
-	<?php if ($_SESSION["subjID"] != 'NA') { ?>
-		var subjID = '<?php echo $_SESSION["subjID"] ?>';
+	<?php
+		$userOk = true;
+		if ($_SESSION["subjID"] != 'NA') {
+			if (user_has_done_experiment($_SESSION["subjID"], $GLOBALS['_FORBIDDEN_EXPTS'])) {
+				$userOk = false;
+			} else {
+				set_done_experiment($_SESSION["subjID"], $GLOBALS['_EXPT_ID']);
+	?>
 
+		var subjID = '<?php echo $_SESSION["subjID"] ?>';
 
 		var dataManager = new DataManager();
 		dataManager.authorize_manual_login = false;
@@ -165,7 +172,7 @@
 
 		});
 
-	<?php } ?>
+	<?php }} ?>
 	</script>
 
 </head>
@@ -191,9 +198,18 @@
 					<!--task info inserted by js -->
 				</div>
 
+				<?php if (!$userOk) { ?>
+					<p>
+ 					 It seems you have already participated in one of our studies that had some elements in common with this one.
+					 This might give you an advantage in terms of performance, recruiting you for this study might bias our results.
+					 We had no way of knowing before you accepted the HIT (your id is not given to us before that), and we appologize for any inconvenience.
+ 				 </p>
 
+ 				 <p>
+ 					 <strong>Again we appologize for the incovenience, please return the HIT.</strong>
+ 				 </p>
 				<!-- this appears only if the participant hasn't accepted the HIT yet -->
-				<?php if ($_SESSION["subjID"] == "NA") { ?>
+				<?php } elseif ($_SESSION["subjID"] == "NA") { ?>
 					<!-- we need to get the participant's consent before they start each task -->
 						<span id="consentAndSubmit" >
 					<p>
