@@ -82,7 +82,7 @@ function has_checkpoint($bdd, $userId, $checkpoint) {
   $noCheckpoint = $GLOBALS['_NO_CHECKPOINT'];
 
   if (!is_existing_table($bdd,$table)) {
-    return ['code' => $noCheckpoint, 'timestamp' => 0, 'message' => 'Table missing'];
+    return ['found' => false, 'code' => $noCheckpoint, 'timestamp' => 0, 'message' => 'Table missing'];
   }
 
   $query = "SELECT code, dbTimestamp, message FROM ${table}
@@ -96,9 +96,9 @@ function has_checkpoint($bdd, $userId, $checkpoint) {
   $count = $req->rowCount();
   if ($count >= 1) {
     $rows = $req->fetchAll(PDO::FETCH_ASSOC);
-    return ['code' => $rows[0]['code'], 'timestamp' => $rows[0]['dbTimestamp'], 'message' => $rows[0]['message']];
+    return ['found' => true, 'code' => $rows[0]['code'], 'timestamp' => $rows[0]['dbTimestamp'], 'message' => $rows[0]['message']];
   } else {
-    return ['code' => $userId, 'timestamp' => 0, 'message' => 'Not found'];
+    return ['found' => false, 'code' => $userId, 'timestamp' => 0, 'message' => 'Not found'];
   }
 }
 
@@ -173,7 +173,7 @@ function set_assignment($bdd, $userId, $assignmentId) {
       return ['status' => 'OK'];
   } else {
       return ['status' => false, 'message' => "set_code: could not add code"];
-  }  
+  }
 }
 
 function signup($bdd, $credentials) {
@@ -409,16 +409,21 @@ function has_been_away_for_too_long($bdd, $userId) {
     $lastTime = (float)$lastInteraction['lastInteraction'];
   }
 
-  if ($lastTime === 0) {
-    return ['status' => true, 'message' => 'Never seen before'];
-  } elseif (get_timestamp_ms() - $lastTime < $GLOBALS['_MAXIMUM_TIME_AWAY']) {
-    return ['status' => true, 'message' => 'In time'];
+  if ((is_null($GLOBALS['_CHECKPOINT_START_CHECK_TIME']) || has_checkpoint($bdd, $userId, $GLOBALS['_CHECKPOINT_START_CHECK_TIME'])['found']) && !has_checkpoint($bdd, $userId, $GLOBALS['_CHECKPOINT_TASKDONE'])['found']) {
+    if ($lastTime === 0) {
+      return ['status' => true, 'message' => 'Never seen before'];
+    } elseif (get_timestamp_ms() - $lastTime < $GLOBALS['_MAXIMUM_TIME_AWAY']) {
+      return ['status' => true, 'message' => 'In time'];
+    } else {
+      $GLOBALS['userId'] = $userId;
+      $message = 'You have been away for more than 20 min.';
+      add_rows($bdd, 'checkpoints', [['code' => $GLOBALS['_CHECKPOINT_TASKEND'], 'message' => $message]]);
+      return ['status' => false, 'message' => $message];
+    }
   } else {
-    $GLOBALS['userId'] = $userId;
-    $message = 'You have been away for more than 20 min.';
-    add_rows($bdd, 'checkpoints', [['code' => $GLOBALS['_CHECKPOINT_TASKEND'], 'message' => $message]]);
-    return ['status' => false, 'message' => $message];
+    return ['status' => true, 'message' => 'Outside time check limits'];
   }
+
 
 }
 
@@ -563,7 +568,7 @@ function add_rows($bdd, $table, $rows) {
     throw new Exception("add_rows: bdd is not a valid pdo connection", 1);
   }
 
-  if ($GLOBALS['userId'] === null) {
+  if (is_null($GLOBALS['userId'])) {
    throw new  Exception("add_rows: no valid user id.", 1);
   }
 
