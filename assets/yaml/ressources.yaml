@@ -68,8 +68,8 @@ tutorials:
           <br>
             <center><img src='./assets/sprites/cross/fullSquare.svg'></center>
           <br><br>
-          <h5>Prediction phase</h5>
-          Then the surrounding square will change to a dotted square:
+          <h5>Prediction phase</h5> 
+          When it is time for you to predict the surrounding square will change to a dotted square:
           <br>
             <center><img src='./assets/sprites/cross/predictionSquare.svg'></center>
           <br>
