@@ -7,3 +7,5 @@ webpack.config.babel.js
 .babelrc
 .eslintrc.json
 builder.js
+*_local*
+*max.js*

@@ -22,10 +22,10 @@
 		$_SESSION["subjID"] = $_REQUEST["workerId"];
 		set_assignment($bdd, $_REQUEST["workerId"], $_REQUEST["assignmentId"]);
 
-		if($_SERVER["HTTPS"] != "on") {
-		    header("Location: https://" . $_SERVER["HTTP_HOST"] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)."?workerId=".urlencode($_REQUEST["workerId"])."&assignmentId=".urlencode($_REQUEST['assignmentId']));
-		    exit();
-		}
+		// if($_SERVER["HTTPS"] != "on") {
+		//     header("Location: https://" . $_SERVER["HTTP_HOST"] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)."?workerId=".urlencode($_REQUEST["workerId"])."&assignmentId=".urlencode($_REQUEST['assignmentId']));
+		//     exit();
+		// }
 	} else {
 		//if the worker ID is not passed, this means the participant "previewing" the HIT and hasn't accepted it
 		$_SESSION["subjID"] = "NA";
@@ -53,10 +53,10 @@
 
 	<script src="node_modules/experiment-babylon-js/lib/babylon.min.js"></script>
 	<script src="node_modules/experiment-boxes/lib/experimentBoxes.min.js" charset="utf-8"></script>
-	<script src="node_modules/experiment-js/lib/experiment.max.js" charset="utf-8"></script>
+	<script src="node_modules/experiment-js/lib/experiment.min.js" charset="utf-8"></script>
 
 	<script>
-	if (location.protocol != 'https:') {
+	if ((location.protocol != 'https:') && (location.host.indexOf("localhost") === -1)) {
 	 location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
 	}
 
