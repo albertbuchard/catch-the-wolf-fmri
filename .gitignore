@@ -8,3 +8,4 @@ webpack.config.babel.js
 .eslintrc.json
 builder.js
 *_local*
+*max.js*
