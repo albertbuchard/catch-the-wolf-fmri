@@ -221,7 +221,7 @@
 						<strong>Please only accept the HIT if you plan to complete all portions of it.</strong>
 					</p>
 
-					<p><strong>The task lasts between 1 hour and 2 hours depending on the breaks you take and is paid 12$ after completion</strong></p>
+					<p><strong>The task lasts between 1 hour and 2 hours depending on the breaks you take.</strong></p>
 
 					<p>Screenshot:<br><br>
 						<center><img src="./assets/images/screenshot.png" alt="In-game screenshot"></center>
