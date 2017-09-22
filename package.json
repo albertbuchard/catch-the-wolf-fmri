@@ -43,13 +43,16 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "bootstrap": "^3.3.7",
+    "chai": "^4.1.0",
     "chartjs": "^0.3.24",
     "experiment-babylon-js": "^2.5.12",
     "experiment-boxes": "^0.1.42",
     "experiment-js": "^0.5.81",
     "experiment-mathjs": "^3.10.2",
     "jquery": "^3.2.1",
+    "js-combinatorics": "^0.5.2",
     "lodash": "^4.17.4",
+    "mocha": "^3.4.2",
     "tether": "^1.4.0"
   }
 }

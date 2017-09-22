@@ -170,10 +170,9 @@ tutorials:
     title: { en: 'New: Catch The Rabbit'}
     content:
       en: >
-          During this level you will have a first level of 50 trials where you will have to catch the red Wolf, then a level of 50 trials where you will have to catch a <b>Rabbit</b>, and finally another level of 50 trials
-          where you will have to catch the red wolf again.
+          On the next level you will have to catch a <b>Rabbit</b> for 50 trials.<br>
           Beware ! The rabbit has nothing to do with the wolf and has a different behavior; it will be your job to figure out how to best predict its next position.<br>
-          You will go through a short tutorial so that you can familiarize yourself with the rabbit.
+          You will go through a little tutorial to familiarize yourself with it.<br><br>
 
 
   fmriDelay:
