@@ -125,7 +125,8 @@
 						document.getElementById('assignmentId').value = r.code;
 						document.getElementById('results').submit();
 					} else {
-						return Promise.reject('You did not finish the task properly.')
+						const addReason = (experiment.hasConstructor(String, r.message)) ? "<br>"+r.message : "";
+						return Promise.reject('You did not finish the task properly.'+addReason)
 					}
 
 	      })

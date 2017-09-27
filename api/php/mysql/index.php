@@ -48,6 +48,8 @@
         if (is_array($logged) && ($logged['status'])) {
           $result['credentials'] = ['type' =>  $logged['type'], 'userId' =>  $logged['userId'], 'logKey' =>  $logged['logKey']];
           $result['newUser'] = false;
+        } elseif (!$logged['status'] && $logged['message'] != 'Invalid credentials') {
+          $result['message'] = $logged['message'];
         } elseif ($_SHOULD_CREATE_USERS_ON_LOGIN) {
           // login failure - try to create new user
           $signup = signup($bdd, $data['credentials']);
@@ -90,61 +92,65 @@
       $accredited = is_accredited($bdd, ['userId' => $userId, 'logKey' => $logKey]);
       $result['message'] = $accredited['message'];
       if (!$accredited['status']) {
-        $shouldLog = true;
-        throw new Exception($result['message'], 1);
+        if ($accredited['shouldLog']) {
+          $shouldLog = true;
+          throw new Exception($result['message'], 1);
+        } 
+      } else {
+        $query = $data['query'];
+        $variables = $data['variables'];
+
+        $interface = $data['interface'];
+        if ($data['interface'] === $_INTERFACE_REST) {
+
+          // Add endpoint
+          if ($data['query'] == 'add') {
+            if (($variables === null) || (!isset($variables['table'])) || (!isset($variables['rows']))) {
+              throw new Exception("Invalid data", 1);
+            }
+            $rows = $variables['rows'];
+            if (!is_array($rows)) {
+              throw new Exception("Invalid rows", 1);
+            }
+
+            $table = $variables['table'];
+            if (!is_string($table)) {
+              throw new Exception("Invalid table " .json_encode($table), 1);
+            }
+
+            $rowsAdded = add_rows($bdd, $table, $rows);
+            $result += ['status' => 'OK', 'Rows added' => json_encode($rowsAdded)];
+          }
+
+          // Checkpoints endpoint
+          if ($query === "getCheckpoint") {
+            $checkpoint = get_checkpoint($bdd, $userId);
+            $result += ['status' => 'OK'] + $checkpoint;
+          }
+
+          if ($query === "hasCheckpoint") {
+            if (($variables === null) || (!isset($variables['checkpoint']))) {
+              throw new Exception("Invalid data", 1);
+            }
+
+            $checkpoint = has_checkpoint($bdd, $userId, $variables['checkpoint']);
+            $result += ['status' => 'OK'] + $checkpoint;
+          }
+
+          if ($query === 'getLastInteraction') {
+            $interaction = get_last_interaction($bdd, $userId);
+            $result += ['status' => 'OK'] + $interaction;
+
+          }
+
+          if ($query === 'getFinalCode') {
+            $finalCode = get_final_code($bdd, $userId);
+            $result += ['status' => 'OK'] + $finalCode;
+          }
+        }
       }
 
-      $query = $data['query'];
-      $variables = $data['variables'];
 
-      $interface = $data['interface'];
-      if ($data['interface'] === $_INTERFACE_REST) {
-
-        // Add endpoint
-        if ($data['query'] == 'add') {
-          if (($variables === null) || (!isset($variables['table'])) || (!isset($variables['rows']))) {
-            throw new Exception("Invalid data", 1);
-          }
-          $rows = $variables['rows'];
-          if (!is_array($rows)) {
-            throw new Exception("Invalid rows", 1);
-          }
-
-          $table = $variables['table'];
-          if (!is_string($table)) {
-            throw new Exception("Invalid table " .json_encode($table), 1);
-          }
-
-          $rowsAdded = add_rows($bdd, $table, $rows);
-          $result += ['status' => 'OK', 'Rows added' => json_encode($rowsAdded)];
-        }
-
-        // Checkpoints endpoint
-        if ($query === "getCheckpoint") {
-          $checkpoint = get_checkpoint($bdd, $userId);
-          $result += ['status' => 'OK'] + $checkpoint;
-        }
-
-        if ($query === "hasCheckpoint") {
-          if (($variables === null) || (!isset($variables['checkpoint']))) {
-            throw new Exception("Invalid data", 1);
-          }
-
-          $checkpoint = has_checkpoint($bdd, $userId, $variables['checkpoint']);
-          $result += ['status' => 'OK'] + $checkpoint;
-        }
-
-        if ($query === 'getLastInteraction') {
-          $interaction = get_last_interaction($bdd, $userId);
-          $result += ['status' => 'OK'] + $interaction;
-
-        }
-
-        if ($query === 'getFinalCode') {
-          $finalCode = get_final_code($bdd, $userId);
-          $result += ['status' => 'OK'] + $finalCode;
-        }
-      }
 
     }
 
@@ -154,6 +160,7 @@
     $httpStatus = 500;
 
     $result['shouldLog'] = ($shouldLog || $GLOBALS['results_should_log']);
+    $result['isDone'] = $isDone;
   }
 
 

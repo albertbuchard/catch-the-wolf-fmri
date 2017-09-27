@@ -457,7 +457,7 @@ function is_accredited($bdd, $data = []) {
     if ($GLOBALS['_SHOULD_CHECK_TASK_END']) {
       $checkpoint = has_checkpoint($bdd, $userId, $GLOBALS['_CHECKPOINT_TASKEND']);
       if ($checkpoint['code'] == $GLOBALS['_CHECKPOINT_TASKEND']) {
-        return ['status' => false, 'message' => $checkpoint['message']];
+        return ['status' => false, 'message' => $checkpoint['message'], 'shouldLog' => false];
       }
     }
     if ($GLOBALS['_SHOULD_CHECK_LAST_INTERACTION']) {
@@ -467,15 +467,15 @@ function is_accredited($bdd, $data = []) {
 
     if (($logKey == $rows[0]['logKey'])&&((!$GLOBALS['_USE_LOG_IP'])||($_SERVER['REMOTE_ADDR'] == $rows[0]['logIp']))) {
       if (check_logkey_and_refresh($bdd, $userId, $rows[0]['logKeyTime'])) {
-        return ['status' => true, 'type' => $rows[0]['type'], 'message' => $message];
+        return ['status' => true, 'type' => $rows[0]['type'], 'message' => $message, 'shouldLog' => false];
       }
-      return ['status' => false, 'message' => 'Session expired'];
+      return ['status' => false, 'message' => 'Session expired', 'shouldLog' => true];
     } else {
-      return ['status' => false, 'message' => 'Invalid Credentials'];
+      return ['status' => false, 'message' => 'Invalid Credentials', 'shouldLog' => true];
     }
   } elseif ($count == 0) {
     // invalid userId
-    return ['status' => false, 'message' => 'Invalid credentials'];
+    return ['status' => false, 'message' => 'Invalid credentials', 'shouldLog' => true];
   } else {
     // userId should be unique
     throw new Exception("is_accredited: duplicated id ? " . $count, 1);
