@@ -114,7 +114,7 @@ tutorials:
       en: >
           The final bonus is determined by your accuracy during the task but only after the level 1. Your current bonus will appear at the center of
           your screen on level 2 and will be calculated on each trial. Missed answer counts as incorrect.<br>
-          <b>Correct trials are rewarded 15 times more than incorrect trials, for a maximum bonus of $2.</b>
+          <b>Correct trials are rewarded more than incorrect trials, for a maximum bonus of $2.</b>
 
 
   keyboardInstruction:
